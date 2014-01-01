@@ -10,6 +10,7 @@ postgresql:
         - names:
             - postgresql-contrib
             - postgresql-9.3-postgis-2.1
+            - postgresql-server-dev-9.3
         - require:
             - pkgrepo: postgresql
     service:
