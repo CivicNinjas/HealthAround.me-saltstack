@@ -3,7 +3,7 @@ base:
         - base
         #- nginx
         #- postgresql
-        #- python
+        - python
         #- redis
         #- supervisor
 
