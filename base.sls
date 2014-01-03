@@ -4,7 +4,7 @@
 
 saltstack_ppa:
     pkgrepo.managed:
-        ppa: saltstack/salt
+        - ppa: saltstack/salt
 
 apps:
     pkg.installed:

@@ -2,8 +2,8 @@ base:
     '*':
         - base
         #- nginx
-        #- postgresql
-        #- python
+        - postgresql
+        - python
         #- redis
         #- supervisor
 
