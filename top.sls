@@ -1,10 +1,11 @@
 base:
     '*':
         - base
-        #- nginx
+        - nginx
         - postgresql
         - python
-        #- redis
+        - redis
         #- supervisor
+        - healthgeist
 
 # vim:set ft=yaml:
