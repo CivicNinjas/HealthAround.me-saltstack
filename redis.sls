@@ -5,9 +5,8 @@ redis-server:
         - running
         - watch:
             - file: /etc/redis/redis.conf
-
-/etc/redis/redis.conf:
     file.managed:
+        - name: /etc/redis/redis.conf
         - source: salt://etc/redis/redis.conf
         - user: redis
         - group: redis

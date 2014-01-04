@@ -10,9 +10,8 @@ nginx:
         - running
         - watch:
             - file: /etc/nginx/sites-available/default
-
-/etc/nginx/sites-available/default:
     file.managed:
+        - name: /etc/nginx/sites-available/default
         - source: salt://etc/nginx/sites-available/default
         - require:
             - pkg: nginx
