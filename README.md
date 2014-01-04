@@ -8,5 +8,5 @@ Setup
     sudo apt-get install git
     sudo git clone https://github.com/CivicNinjas/SitegeistHealth-saltstack.git /srv/salt
     cd /srv/salt
-    sudo ./setupsalt
+    sudo ./setupsalt-minion
     sudo salt-call state.highstate
