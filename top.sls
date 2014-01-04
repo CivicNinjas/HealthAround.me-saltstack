@@ -4,7 +4,7 @@ base:
         - nginx
         - postgresql
         - python
-        #- redis
+        - redis
         #- supervisor
         - healthgeist
 
