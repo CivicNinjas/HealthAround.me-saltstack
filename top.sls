@@ -5,7 +5,7 @@ base:
         - postgresql
         - python
         - redis
-        #- supervisor
+        - supervisor
         - healthgeist
 
 # vim:set ft=yaml:
