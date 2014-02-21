@@ -22,8 +22,8 @@ healthgeist:
         - name: https://github.com/CivicNinjas/SitegeistHealth.git
         - target: {{app_cwd}}
     file.managed:
-        - name: {{app_cwd}}local_settings.py
-        - source: salt://healthgeist/local_settings.py
+        - name: {{app_cwd}}settings_overrride.py
+        - source: salt://healthgeist/settings_override.py
         - mode: 0644
         - template: jinja
         - require:
@@ -42,7 +42,7 @@ collect_static:
         - cwd: {{app_cwd}}
         - runas: www-data
         - watch:
-            - git: mezzanine
+            - git: healthgeist
 
 {% for username, user in pillar.postgres.users.items() %}
 pg_user-{{username}}:
