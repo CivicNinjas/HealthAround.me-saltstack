@@ -22,7 +22,7 @@ healthgeist:
         - name: https://github.com/CivicNinjas/SitegeistHealth.git
         - target: {{app_cwd}}
     file.managed:
-        - name: {{app_cwd}}settings_overrride.py
+        - name: {{app_cwd}}settings_override.py
         - source: salt://healthgeist/settings_override.py
         - mode: 0644
         - template: jinja
@@ -30,6 +30,9 @@ healthgeist:
             - git: healthgeist
 
 pip_requirements:
+    pip.installed:
+        - names:
+            - gunicorn
     cmd.wait:
         - name: pip install -r requirements.txt
         - cwd: {{app_cwd}}
@@ -38,9 +41,15 @@ pip_requirements:
 
 collect_static:
     cmd.wait:
-        - name: python manage.py collectstatic
+        - name: python manage.py collectstatic --noinput
         - cwd: {{app_cwd}}
         - runas: www-data
+        - watch:
+            - git: healthgeist
+
+restart_gunicorn:
+    cmd.wait:
+        - name: supervisorctl restart gunicorn
         - watch:
             - git: healthgeist
 
