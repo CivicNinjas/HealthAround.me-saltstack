@@ -1,7 +1,7 @@
 users:
     - user1
 
-postgres1:
+postgres:
     users:
         app_user:
             password: djangouserspassword
@@ -10,6 +10,6 @@ postgres1:
 
 django:
     allowed_host: '*'
-    db_engine: postgres1
+    db_engine: postgres
     db_engine_module: django.db.backends.postgresql_psycopg2
     secret_key: KEEPitSECRETkeepITsafe
