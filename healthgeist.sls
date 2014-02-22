@@ -30,9 +30,6 @@ healthgeist:
             - git: healthgeist
 
 pip_requirements:
-    pip.installed:
-        - names:
-            - gunicorn
     cmd.wait:
         - name: pip install -r requirements.txt
         - cwd: {{app_cwd}}
