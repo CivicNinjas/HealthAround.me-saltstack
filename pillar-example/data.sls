@@ -11,5 +11,5 @@ postgres:
 django:
     allowed_host: '*'
     db_engine: postgres
-    db_engine_module: django.db.backends.postgresql_psycopg2
+    db_engine_module: django.contrib.gis.db.backends.postgis
     secret_key: KEEPitSECRETkeepITsafe

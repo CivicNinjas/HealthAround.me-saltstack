@@ -1,5 +1,5 @@
-DEBUG = False
-TEMPLATE_DEBUG = False
+DEBUG = {{pillar.django.get('debug', 'False')}}
+TEMPLATE_DEBUG = {{pillar.django.get('template_debug', 'False')}}
 
 ALLOWED_HOSTS = ['{{pillar.django.allowed_host}}']
 
