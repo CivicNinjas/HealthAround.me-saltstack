@@ -1,7 +1,7 @@
 supervisor:
     pkg:
         - installed
-    pip.install:
+    pip.installed:
         - name: gunicorn
     service:
         - running
