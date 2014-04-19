@@ -1,40 +1,40 @@
-{%- set app_cwd = '/var/www/healthgeist/' -%}
+{%- set app_cwd = '/var/www/healtharoundme/' -%}
 
-healthgeist_db:
+healtharoundme_db:
     postgres_database.present:
-        - name: healthgeist
+        - name: healtharoundme
         - owner: {{pillar.postgres.app_owner}}
         - runas: postgres
         - require:
             - postgres_user: pg_user-{{pillar.postgres.app_owner}}
     file.managed:
-        - name: /usr/local/bin/setup_healthgeist_db_gis.sh
-        - source: salt://scripts/setup_healthgeist_db_gis.sh
+        - name: /usr/local/bin/setup_healtharoundme_db_gis.sh
+        - source: salt://scripts/setup_healtharoundme_db_gis.sh
         - mode: 755
     cmd.wait:
-        - name: /usr/local/bin/setup_healthgeist_db_gis.sh
+        - name: /usr/local/bin/setup_healtharoundme_db_gis.sh
         - user: postgres
         - watch:
-            - postgres_database: healthgeist_db
+            - postgres_database: healtharoundme_db
 
-healthgeist:
+healtharoundme:
     git.latest:
-        - name: https://github.com/CivicNinjas/SitegeistHealth.git
+        - name: https://github.com/CivicNinjas/HealthAround.me.git
         - target: {{app_cwd}}
     file.managed:
         - name: {{app_cwd}}settings_override.py
-        - source: salt://healthgeist/settings_override.py
+        - source: salt://healtharoundme/settings_override.py
         - mode: 0644
         - template: jinja
         - require:
-            - git: healthgeist
+            - git: healtharoundme
 
 pip_requirements:
     cmd.wait:
         - name: pip install -r requirements.txt
         - cwd: {{app_cwd}}
         - watch:
-            - git: healthgeist
+            - git: healtharoundme
 
 collect_static:
     cmd.wait:
@@ -42,13 +42,13 @@ collect_static:
         - cwd: {{app_cwd}}
         - runas: www-data
         - watch:
-            - git: healthgeist
+            - git: healtharoundme
 
 restart_gunicorn:
     cmd.wait:
         - name: supervisorctl restart gunicorn
         - watch:
-            - git: healthgeist
+            - git: healtharoundme
 
 {% for username, user in pillar.postgres.users.items() %}
 pg_user-{{username}}:

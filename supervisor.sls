@@ -8,8 +8,8 @@ supervisor:
         - watch:
             - file: /etc/supervisor/conf.d/*.conf
     file.managed:
-        - name: /etc/supervisor/conf.d/healthgeist.conf
-        - source: salt://etc/supervisor/conf.d/healthgeist.conf
+        - name: /etc/supervisor/conf.d/healtharoundme.conf
+        - source: salt://etc/supervisor/conf.d/healtharoundme.conf
         - mode: 644
         - require:
             - pkg: supervisor

@@ -8,7 +8,7 @@ server {
     server_name _;
 
     location /static/{
-        alias /var/www/healthgeist/static/;
+        alias /var/www/healtharoundme/static/;
     }
 
     location / {

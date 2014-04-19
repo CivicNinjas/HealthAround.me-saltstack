@@ -1,4 +1,4 @@
-Healthgeist Salt Stack
+HealthAround.me Salt Stack
 ======================
 
 Setup
@@ -6,7 +6,7 @@ Setup
 
     sudo apt-get update
     sudo apt-get install git
-    sudo git clone https://github.com/CivicNinjas/SitegeistHealth-saltstack.git /srv/salt
+    sudo git clone https://github.com/CivicNinjas/HealthAround.me-saltstack.git /srv/salt
     sudo cp -a pillar-example /srv/pillar
     ### EDIT /srv/pillar/data.sls to include real passwords
     cd /srv/salt
