@@ -1,4 +1,7 @@
 {%- set app_cwd = '/var/www/healtharoundme/' -%}
+{%- set frontend_cwd = '/var/www/healtharoundme-frontend/' -%}
+
+####### API
 
 healtharoundme_db:
     postgres_database.present:
@@ -59,3 +62,59 @@ pg_user-{{username}}:
         - superuser: {{user.get('superuser', False)}}
         - runas: postgres
 {% endfor %}
+
+##### Frontend
+
+healtharoundme-frontend:
+    git.latest:
+        - name: https://github.com/CivicNinjas/HealthAround.me-frontend.git
+        - target: {{frontend_cwd}}
+
+nodejs:
+    pkgrepo.managed:
+        - ppa: chris-lea/node.js
+        - required_in:
+            - pkg: nodejs
+    pkg.installed:
+        - require:
+            - pkgrepo: nodejs
+
+gulp_requirements:
+    cmd.wait:
+        - name: npm install
+        - cwd: {{frontend_cwd}}
+        - watch:
+            - git: healtharoundme-frontend
+
+bower:
+    npm.installed:
+        - require:
+            - pkg: nodejs
+    cmd.wait:
+        - name: bower install --allow-root
+        - cwd: {{frontend_cwd}}
+        - watch:
+            - git: healtharoundme-frontend
+        - require:
+            - cmd: gulp_requirements
+
+coffeeify_fix:  # this is temporary until frontends package.json is fixed
+    cmd.wait:
+        - name: npm install coffeeify
+        - cwd: {{frontend_cwd}}
+        - watch:
+            - git: healtharoundme-frontend
+        - require:
+            - cmd: gulp_requirements
+
+gulp_build:
+    cmd.wait:
+        - name: npm run build
+        - cwd: {{frontend_cwd}}
+        - watch:
+            - git: healtharoundme-frontend
+        - require:
+            - cmd: bower
+            - cmd: gulp_requirements
+
+# vim: set ft=yaml:
