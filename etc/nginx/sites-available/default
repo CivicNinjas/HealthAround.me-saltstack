@@ -3,6 +3,7 @@ server {
     client_max_body_size 4G;
     server_name _;
     root /var/www/healtharoundme-frontend/public/;
+    try_files $uri $uri/ /index.html =404;
 }
 
 # vim: set filetype=nginx:
