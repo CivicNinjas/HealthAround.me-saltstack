@@ -6,6 +6,7 @@ base:
         - python
         - redis
         - supervisor
+        - gdal
         - healtharoundme
 
 # vim:set ft=yaml:
